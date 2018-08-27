@@ -54,17 +54,19 @@ class Utilities:
         #     s += -10*np.log10(p/10.0) #i know averaging db is wrong here, deliberately doing it
         # return -s/len(psd) #-10*np.log10(s)
         avg_psd_dB =  10*np.log10(np.average(psd)/10.0)
+        #avg_psd_dB =  10*np.log10(np.sum(psd)/10.0)
         return avg_psd_dB
     @profile
     def plot_fft(self, reals, imags, timea, sample_rate, fc, NFFT, myfile):
         M = len(reals)/NFFT
         
+        print M
         # Open a file
         text_file = open(myfile+"_energyfft.txt", "w")
 
         for i in range(0,int(M)):
             iq_samples = np.array([ (re + 1j*co) for re,co in zip(reals,imags)])[i*NFFT:(i+1)*NFFT]
-            x = pylab.psd(iq_samples, NFFT=NFFT, Fs=sample_rate/1e6, Fc=fc, window=mlab.window_hanning)      
+            x = pylab.psd(iq_samples, NFFT=NFFT, Fs=sample_rate/1e6, Fc=fc, window=mlab.window_hanning)
             totalpower = self.totalpower(x[0])
             print myfile, i, totalpower
             text_file.write("%s\n" % totalpower)
@@ -102,24 +104,23 @@ class USRP_IQ_analysis:
              
 vals = []
 datatype = scipy.complex64
-block_length = 10000 #-1
-block_offset = 500000 #<---change to random offsets between 0 to (max_no_of_iq_samples - block_length)
-sample_rate = 1e6
-fc = 915
-NFFT = 1024
-for myfile in ['usrp_noise']:
+block_length = 1500000 #-1
+block_offset = 100000 #<---change to random offsets between 0 to (max_no_of_iq_samples - block_length)
+sample_rate = 16e6
+fc = 915.8e6
+NFFT = 4096
+for myfile in ['samples3']:
     filename = myfile+".dat"
     usrp = USRP_IQ_analysis(filename, datatype, block_length, block_offset, sample_rate)
     r,i,t = usrp.read_samples()
     utils = Utilities()
-    #print r
     vals.append( utils.plot_fft(r,i,t,sample_rate,fc, NFFT, myfile) )
 
-    with open(myfile+"_energyfft.txt","r") as f:
-        numbers = []
-        for line in f:
-            numbers.append(float(line))
-        numbers.sort()
-    print(statistics.median(map(float, numbers)))
-    f.close()
-    print_prof_data()
+    #with open(myfile+"_energyfft.txt","r") as f:
+    #    numbers = []
+    #    for line in f:
+    #        numbers.append(float(line))
+    #    numbers.sort()
+    #f.close()
+    #print(statistics.median(map(float, numbers)))
+    #print_prof_data()
