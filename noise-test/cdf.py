@@ -1,5 +1,9 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+
+matplotlib.rcParams.update({'font.size':30})
+matplotlib.rcParams['figure.figsize'] = 18, 10
 
 f = plt.figure()
 
@@ -20,13 +24,13 @@ def cdf(data, Colour, Label):
     cdf = np.cumsum(counts)
 
     # Plot the cdf
-    plt.plot(bin_edges[0:-1], cdf,linestyle='--', color=Colour, label=Label)
+    plt.plot(bin_edges[0:-1], cdf, color=Colour, linewidth=5, label=Label)
     plt.ylim((0,1))
     plt.ylabel("CDF")
     plt.xlabel("Power")
     #plt.grid(True)
     plt.legend(loc='lower right')
-    f.savefig("cdf-nov27-10pm.pdf")
+    f.savefig("noise-cdf.pdf")
 
 
 data = np.loadtxt('1.dat')
