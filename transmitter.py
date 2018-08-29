@@ -51,7 +51,7 @@ class top_block(gr.top_block):
 				channels=range(1),
 			),
 		)
-		self.uhd_usrp_sink_0.set_samp_rate(10)
+		self.uhd_usrp_sink_0.set_samp_rate(1000000)
 		self.uhd_usrp_sink_0.set_center_freq(915800000, 0)
 		self.uhd_usrp_sink_0.set_gain(gain, 0)
 		self.uhd_usrp_sink_0.set_bandwidth(samp_rate, 0)
@@ -59,7 +59,7 @@ class top_block(gr.top_block):
 	
 		print device_info['mboard_serial']
 		  
-		self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 915.8e6, 1, 0)
+		self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 2000, 1, 0)
 
 		##################################################
 		# Connections
@@ -102,7 +102,7 @@ def main(top_block_cls=top_block, options=None):
 	tb.start()
 	
 	# gain_list = [i for i in range(50, 85, 5)]
-	gain_list = np.random.choice(np.arange(70,100,5), 100, replace=True) 
+	gain_list = np.random.choice(np.arange(70,100,5), 50, replace=True) 
 	# gain_list = [50,100,150,200,250,50,100,150,200,250]
 	# gain_list.extend([i for i in range(20, 51)])
 	#gain_list.extend([i for i in range(5, 51, 5)])
@@ -112,27 +112,27 @@ def main(top_block_cls=top_block, options=None):
 	values = []
 	elapsd_time = 0
 	for gain in gain_list:
-		gain = 100 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		gain = 100000 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		tb.set_gain(gain)
 		values.append(gain)
 		t.append(elapsd_time)
-		transmit_time = np.random.uniform(0,0.1)
-		# transmit_time = 0.5 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		#transmit_time = np.random.uniform(0.1,0.5)
+		transmit_time = 0.01 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		elapsd_time = elapsd_time+transmit_time
 		values.append(gain)
 		t.append(elapsd_time)
 		values.append(0)        
 		t.append(elapsd_time)
-		time .sleep(transmit_time)
-		sleep_time = np.random.uniform(0.6,1)
-		# sleep_time = 1 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		time.sleep(transmit_time)
+		#sleep_time = np.random.uniform(0.3,0.5)
+		sleep_time = 0.5 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		elapsd_time = elapsd_time + sleep_time
 		values.append(0)
 		t.append(elapsd_time)
 		tb.set_gain(0)
 		time.sleep(sleep_time)
 	   # start_iq_read(gain)
-
+	print "Tx completed"
 		# time.sleep(3) #Allow 20s for transmitter to respond
 	plt.figure()
 	plt.plot(t,values)
