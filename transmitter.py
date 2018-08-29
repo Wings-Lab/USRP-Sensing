@@ -51,7 +51,7 @@ class top_block(gr.top_block):
 				channels=range(1),
 			),
 		)
-		self.uhd_usrp_sink_0.set_samp_rate(1000000)
+		self.uhd_usrp_sink_0.set_samp_rate(1000)
 		self.uhd_usrp_sink_0.set_center_freq(915800000, 0)
 		self.uhd_usrp_sink_0.set_gain(gain, 0)
 		self.uhd_usrp_sink_0.set_bandwidth(samp_rate, 0)
@@ -59,7 +59,7 @@ class top_block(gr.top_block):
 	
 		print device_info['mboard_serial']
 		  
-		self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 2000, 1, 0)
+		self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1000, 1, 0)
 
 		##################################################
 		# Connections
