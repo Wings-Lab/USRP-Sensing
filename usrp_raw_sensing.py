@@ -60,37 +60,28 @@ class Utilities:
     def plot_fft(self, reals, imags, timea, sample_rate, fc, NFFT, myfile):
         M = len(reals)/NFFT
         
-        print M
-        # Open a file
-        text_file = open(myfile+"_energyfft.txt", "w")
-
         for i in range(0,int(M)):
             iq_samples = np.array([ (re + 1j*co) for re,co in zip(reals,imags)])[i*NFFT:(i+1)*NFFT]
             x = pylab.psd(iq_samples, NFFT=NFFT, Fs=sample_rate/1e6, Fc=fc, window=mlab.window_hanning)
             totalpower = self.totalpower(x[0])
-            print myfile, i, totalpower
-            text_file.write("%s\n" % totalpower)
-            text_file.flush()
-	    #pylab.show()
+            print i, totalpower
+            myfile.write("%s\n" % totalpower)
+            myfile.flush()
 	    pylab.close()
-            
-        text_file.close()        
-
 
 class USRP_IQ_analysis:
     
-    def __init__(self, iqfile, datatype, block_length, block_offset, sample_rate):
+    def __init__(self, iqfile, datatype, block_length, block_offset, sample_rate, binary_offset):
         self.iqfile = iqfile
         self.datatype = datatype
         self.sizeof_data = self.datatype.nbytes    # number of bytes per sample in file
         self.block_length = block_length
         self.sample_rate = sample_rate
         self.block_offset = block_offset
-        self.binary_offset = self.block_offset*scipy.dtype(self.datatype).itemsize
+        self.binary_offset = binary_offset #self.block_offset*scipy.dtype(self.datatype).itemsize
         
-    def read_samples(self):
-        hfile = open(self.iqfile, "r")
-        hfile.seek(self.binary_offset, os.SEEK_SET)  # seek
+    def read_samples(self, hfile, binary_offset):
+        hfile.seek(binary_offset, os.SEEK_SET)  # seek
         try:
             iq = scipy.fromfile(hfile, dtype=self.datatype, count=self.block_length)
         except MemoryError:
@@ -99,28 +90,33 @@ class USRP_IQ_analysis:
             reals = scipy.array([ (r.real)  for r in iq])
             imags = scipy.array([ (i.imag)  for i in iq])
             time = scipy.array([i*(1/self.sample_rate) for i in range(len(reals))])
-        hfile.close()
         return reals,imags,time
              
 vals = []
 datatype = scipy.complex64
-block_length = 1500000 #-1
-block_offset = 100000 #<---change to random offsets between 0 to (max_no_of_iq_samples - block_length)
-sample_rate = 16e6
+sample_rate = 1e6
 fc = 915.8e6
-NFFT = 4096
-for myfile in ['samples3']:
-    filename = myfile+".dat"
-    usrp = USRP_IQ_analysis(filename, datatype, block_length, block_offset, sample_rate)
-    r,i,t = usrp.read_samples()
+NFFT = 1024
+block_length = 100000
+for myfile in ['usrp_iq/100ms_iq.dat']:
+    block_offset = 100
+    binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
+    hfile = open(myfile, "r")
+    old_file_position = hfile.tell()
+    hfile.seek(0, os.SEEK_END)
+    size = hfile.tell()
+    hfile.seek(old_file_position, os.SEEK_SET)
+    usrp = USRP_IQ_analysis(myfile, datatype, block_length, block_offset, sample_rate, binary_offset)
+    print size
+    size -= binary_offset
     utils = Utilities()
-    vals.append( utils.plot_fft(r,i,t,sample_rate,fc, NFFT, myfile) )
-
-    #with open(myfile+"_energyfft.txt","r") as f:
-    #    numbers = []
-    #    for line in f:
-    #        numbers.append(float(line))
-    #    numbers.sort()
-    #f.close()
-    #print(statistics.median(map(float, numbers)))
-    #print_prof_data()
+    tfile = open(myfile+'_fft.txt', 'w')
+    while size > 0:
+        r,i,t = usrp.read_samples(hfile, binary_offset)
+        vals.append( utils.plot_fft(r,i,t,sample_rate,fc, NFFT, tfile))
+        block_offset += block_length
+        binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
+        size -= block_length*scipy.dtype(scipy.complex64).itemsize
+        print size
+    hfile.close()
+    tfile.close()
