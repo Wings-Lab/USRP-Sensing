@@ -64,7 +64,7 @@ class Utilities:
             iq_samples = np.array([ (re + 1j*co) for re,co in zip(reals,imags)])[i*NFFT:(i+1)*NFFT]
             x = pylab.psd(iq_samples, NFFT=NFFT, Fs=sample_rate/1e6, Fc=fc, window=mlab.window_hanning)
             totalpower = self.totalpower(x[0])
-            print i, totalpower
+            #print i, totalpower
             myfile.write("%s\n" % totalpower)
             myfile.flush()
 	    pylab.close()
@@ -98,10 +98,15 @@ sample_rate = 1e6
 fc = 915.8e6
 NFFT = 1024
 block_length = 100000
-for myfile in ['usrp_iq/100ms_iq.dat']:
+
+files = os.listdir('usrp_iq')
+files = sorted(files)
+print files
+for myfile in files:
+    print myfile
     block_offset = 100
     binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
-    hfile = open(myfile, "r")
+    hfile = open('usrp_iq/'+myfile, "r")
     old_file_position = hfile.tell()
     hfile.seek(0, os.SEEK_END)
     size = hfile.tell()
@@ -110,7 +115,7 @@ for myfile in ['usrp_iq/100ms_iq.dat']:
     print size
     size -= binary_offset
     utils = Utilities()
-    tfile = open(myfile+'_fft.txt', 'w')
+    tfile = open('usrp_iq/'+myfile[:-4]+'_fft.txt', 'w')
     while size > 0:
         r,i,t = usrp.read_samples(hfile, binary_offset)
         vals.append( utils.plot_fft(r,i,t,sample_rate,fc, NFFT, tfile))
