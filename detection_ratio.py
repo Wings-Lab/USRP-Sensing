@@ -63,4 +63,6 @@ plt.xlabel('Transmission Length (ms)')
 plt.ylabel('Detection Ratio')
 plt.xticks(np.arange(len(tx)), [0.001, 1, 10, 100, 1000])
 
+plt.savefig('detection_ratio_usrp.pdf')
+
 plt.show()
