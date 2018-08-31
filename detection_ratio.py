@@ -54,14 +54,22 @@ print counts4, np.mean(counts4)
 tx = [100, np.mean(counts1), np.mean(counts2), np.mean(counts3), np.mean(counts4)]
 tx = [i for i in reversed(tx)]
 idx = np.arange(len(tx))
-width = 0.3
+width = 0.22
 
-plt.bar(idx, tx, width)
+tx_iq = [60, 94, 98, 99, 100]
+
+plt.bar(idx, tx, width, label='Online FFT')
+plt.bar(idx+width, tx_iq, width, label='Offline FFT')
 
 plt.ylim([0, 100])
 plt.xlabel('Transmission Length (ms)')
 plt.ylabel('Detection Ratio')
-plt.xticks(np.arange(len(tx)), [0.001, 1, 10, 100, 1000])
+plt.xticks(np.arange(len(tx))+width/2, [0.001, 1, 10, 100, 1000])
+
+ax = plt.gca()
+ax.yaxis.grid(linestyle='dotted')
+
+plt.legend()
 
 plt.savefig('detection_ratio_usrp.pdf')
 
