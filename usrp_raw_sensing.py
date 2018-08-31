@@ -10,7 +10,6 @@ import time
 import numpy as np 
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
-import statistics
 import os
 import time
 from functools import wraps
@@ -102,7 +101,6 @@ block_length = 100000
 files = os.listdir('usrp_iq')
 files = sorted(files)[1:]
 print files
-#for myfile in ['100ms_run2.dat', '100ms_run3.dat', '100ms_run4.dat', '100ms_run5.dat']:
 for myfile in ['100ms_run1.dat', '100ms_run2.dat']:
     print myfile
     block_offset = 100
