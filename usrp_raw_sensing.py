@@ -95,13 +95,13 @@ vals = []
 datatype = scipy.complex64
 sample_rate = 1e6
 fc = 915.8e6
-NFFT = 4096
+NFFT = 8192
 block_length = 100000
 
 files = os.listdir('usrp_iq')
 files = sorted(files)[1:]
 print files
-for myfile in ['100ms_run1.dat', '100ms_run2.dat']:
+for myfile in ['2m_run1.dat', '2m_run2.dat', '2m_run3.dat', '2m_run4.dat', '2m_run5.dat', '4m_run1.dat', '4m_run2.dat', '4m_run3.dat', '4m_run4.dat', '4m_run5.dat', '6m_run1.dat', '6m_run2.dat', '6m_run3.dat', '6m_run4.dat', '6m_run5.dat']:
     print myfile
     block_offset = 100
     binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
