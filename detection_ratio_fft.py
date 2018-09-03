@@ -18,7 +18,7 @@ def getData(files):
     return data
 
 def countTx(data):
-    th = -70
+    th = -80
     counts = []
     for d in data:
         count = 0
