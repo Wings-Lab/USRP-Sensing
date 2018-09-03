@@ -14,8 +14,7 @@ def countTx(d):
            low = 1
     return count
 
-#srates = [2, 4, 6, 8, 16]
-srates = [16]
+srates = [2, 4, 6, 8, 16]
 runs = [1, 2, 3, 4, 5]
 counts = {}
 for srate in srates:
