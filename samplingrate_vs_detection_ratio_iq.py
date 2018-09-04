@@ -18,7 +18,7 @@ def countTx(d):
            low = 1
     return count
 
-srates = [2, 4, 6, 8, 16]
+srates = [512, 2, 4, 6, 8, 16]
 runs = [1, 2, 3, 4, 5]
 counts = {}
 for srate in srates:
@@ -30,7 +30,7 @@ for srate in srates:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
+tx = [65.2, 93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
 
 idx = np.arange(len(tx))
 width = 0.28
@@ -40,7 +40,7 @@ plt.bar(idx, tx, width)
 plt.ylim([0, 100])
 plt.xlabel('Samping Rate (MHz)')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx)), [1, 2, 4, 6, 8, 16])
+plt.xticks(np.arange(len(tx)), [0.5, 1, 2, 4, 6, 8, 16])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
