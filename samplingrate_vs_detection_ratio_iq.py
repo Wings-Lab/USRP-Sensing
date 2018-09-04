@@ -1,6 +1,10 @@
 import os
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
+
+matplotlib.rcParams.update({'font.size':30})
+matplotlib.rcParams['figure.figsize'] = 18, 10
 
 def countTx(d):
     th = -70
@@ -34,8 +38,8 @@ width = 0.28
 plt.bar(idx, tx, width)
 
 plt.ylim([0, 100])
-plt.xlabel('Transmission Length (ms)')
-plt.ylabel('Detection Ratio')
+plt.xlabel('Samping Rate (MHz)')
+plt.ylabel('Detection Ratio (%)')
 plt.xticks(np.arange(len(tx)), [1, 2, 4, 6, 8, 16])
 
 ax = plt.gca()

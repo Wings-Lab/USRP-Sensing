@@ -19,22 +19,22 @@ def countTx(d):
     return count
 
 clocks = [100, 250, 500, 1000, 1296]
-runs = [1, 2, 3, 4, 5]
+runs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 counts = {}
 
 for clock in clocks:
     counts[clock] = []
     for r in runs:
-        data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=25, usecols=7)
-        plt.plot(data, label=str(clock))
-        plt.legend()
-        plt.show()
+        data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        #plt.plot(data, label=str(clock))
+        #plt.legend()
+        #plt.show()
         c = countTx(data)
         counts[clock].append(c)
 
-print counts
 for i in counts:
+    #counts[i] = sorted(counts[i])[4:]
     print i, counts[i], np.mean(counts[i])
 
 """
