@@ -23,7 +23,7 @@ tx_l = ['100ms', '10ms', '1ms', '1us']
 counts = {}
 for f in tx_l:
     counts[f] = []
-    for r in [1, 2, 3, 4, 5]:
+    for r in [1]:
         data = np.loadtxt('usrp_iq/'+f+'_run'+str(r)+'_fft.txt')
         counts[f].append(countTx(data))
 for count in counts:
