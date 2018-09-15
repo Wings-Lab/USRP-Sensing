@@ -7,7 +7,7 @@ matplotlib.rcParams.update({'font.size':30})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 def countTx(d):
-    th = -90
+    th = -70
     count = 0
     low = 1
     for i in d:
@@ -18,15 +18,18 @@ def countTx(d):
            low = 1
     return count
 
-clocks = [100, 250, 500, 1000, 1296]
-runs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+clocks = [100, 250, 500, 1000, 1250, 1536]
+#runs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+runs = [1, 2]
 
 counts = {}
 
 for clock in clocks:
     counts[clock] = []
     for r in runs:
-        data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        print clock, r
+        #data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=25)
         #plt.plot(data, label=str(clock))
         #plt.legend()
         #plt.show()
