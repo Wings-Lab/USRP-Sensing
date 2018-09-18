@@ -117,7 +117,7 @@ def main(top_block_cls=top_block, options=None):
 		values.append(gain)
 		t.append(elapsd_time)
 		#transmit_time = np.random.uniform(0.1,0.5)
-		transmit_time = 0.01 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		transmit_time = 0.1 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		elapsd_time = elapsd_time+transmit_time
 		values.append(gain)
 		t.append(elapsd_time)
@@ -129,11 +129,12 @@ def main(top_block_cls=top_block, options=None):
 		elapsd_time = elapsd_time + sleep_time
 		values.append(0)
 		t.append(elapsd_time)
-		tb.set_gain(0)
-		time.sleep(sleep_time)
+		#tb.set_gain(0)
+		#time.sleep(sleep_time)
 	   # start_iq_read(gain)
 	print "Tx completed"
 		# time.sleep(3) #Allow 20s for transmitter to respond
+	tb.set_gain(0)
 	plt.figure()
 	plt.plot(t,values)
 	plt.show()	

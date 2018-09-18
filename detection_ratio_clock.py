@@ -7,20 +7,30 @@ matplotlib.rcParams.update({'font.size':30})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 def countTx(d):
-    th = -70
+    th = -60
     count = 0
     low = 1
+    skip = False
+    rep = 0
     for i in d:
+        if skip and rep > 0:
+            rep -= 1
+            continue
         if float(i) > th and low == 1:
             count += 1
             low = 0
+            skip = True
+            rep = 125
         if float(i) < th:
-           low = 1
+            skip = False
+            low = 1
     return count
 
-clocks = [100, 250, 500, 1000, 1250, 1536]
+#clocks = [100, 250, 500, 1000, 1250, 1536]
+clocks = [100, 500, 1296]
+#clocks = [100, 250, 500, 1000, 1296]
 #runs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-runs = [1, 2]
+runs = [1, 2, 3, 4, 5]
 
 counts = {}
 
@@ -28,39 +38,13 @@ for clock in clocks:
     counts[clock] = []
     for r in runs:
         print clock, r
-        #data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
-        data = np.loadtxt('clock_exps/'+str(clock)+'_run'+str(r)+'.txt', skiprows=25)
-        #plt.plot(data, label=str(clock))
-        #plt.legend()
+        #data = np.loadtxt('clock_exps/tx_100/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        data = np.loadtxt('usrp_clock_exps/usrp_'+str(r)+'_'+str(clock)+'.txt', skiprows=25)
+        #plt.plot(data, marker='*')
         #plt.show()
         c = countTx(data)
-        counts[clock].append(c)
+        if c > 5:
+            counts[clock].append(c)
 
 for i in counts:
-    #counts[i] = sorted(counts[i])[4:]
     print i, counts[i], np.mean(counts[i])
-
-"""
-tx = [100, np.mean(counts1), np.mean(counts2), np.mean(counts3), np.mean(counts4)]
-tx = [i for i in reversed(tx)]
-idx = np.arange(len(tx))
-width = 0.22
-
-tx_iq = [60, 94, 98, 99, 100]
-
-plt.bar(idx, tx, width, label='Online FFT')
-plt.bar(idx+width, tx_iq, width, label='Offline FFT')
-
-plt.ylim([0, 100])
-plt.xlabel('Transmission Length (ms)')
-plt.ylabel('Detection Ratio')
-plt.xticks(np.arange(len(tx))+width/2, [0.001, 1, 10, 100, 1000])
-
-ax = plt.gca()
-ax.yaxis.grid(linestyle='dotted')
-
-
-plt.savefig('detection_ratio_usrp.pdf')
-
-plt.show()
-"""
