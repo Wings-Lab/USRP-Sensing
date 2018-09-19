@@ -46,10 +46,12 @@ for i in counts:
 
 clocks = [32, 64, 128, 256, 512, 1024]
 tx = [10, 12, 29, 36, 10, 1]
+tx_1 = [10, 12, 29, 36, 10, 1]
 idx = np.arange(len(tx))
 width = 0.22
 
-plt.bar(idx, tx, width)
+plt.bar(idx, tx, width, label='1ms')
+plt.bar(idx+width, tx_1, width, label='1s')
 
 #plt.ylim([0, 100])
 plt.xlabel('FFT Size')
@@ -58,6 +60,8 @@ plt.xticks(np.arange(len(tx))+width/2, clocks)
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
+
+plt.legend()
 
 plt.savefig('plots/detection_ratio_fft_size.pdf')
 
