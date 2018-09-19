@@ -7,7 +7,7 @@ matplotlib.rcParams.update({'font.size':30})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 def countTx(d):
-    th = -60
+    th = -80
     count = 0
     low = 1
     skip = False
@@ -20,7 +20,7 @@ def countTx(d):
             count += 1
             low = 0
             skip = True
-            rep = 125
+            rep = 120
         if float(i) < th:
             skip = False
             low = 1
@@ -36,10 +36,29 @@ for clock in clocks:
     for r in runs:
         print clock, r
         data = np.loadtxt('fft_exps/fft_'+str(clock)+'_'+str(r)+'.txt', skiprows=25)
-        #plt.plot(data, marker='*')
+        #plt.plot(data, label=clock, marker='*')
         #plt.show()
         c = countTx(data)
         counts[clock].append(c)
 
 for i in counts:
     print i, counts[i], np.mean(counts[i])
+
+clocks = [32, 64, 128, 256, 512, 1024]
+tx = [10, 12, 29, 36, 10, 1]
+idx = np.arange(len(tx))
+width = 0.22
+
+plt.bar(idx, tx, width)
+
+#plt.ylim([0, 100])
+plt.xlabel('FFT Size')
+plt.ylabel('Detection Ratio')
+plt.xticks(np.arange(len(tx))+width/2, clocks)
+
+ax = plt.gca()
+ax.yaxis.grid(linestyle='dotted')
+
+plt.savefig('plots/detection_ratio_fft_size.pdf')
+
+plt.show()
