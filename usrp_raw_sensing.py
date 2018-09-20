@@ -95,13 +95,14 @@ vals = []
 datatype = scipy.complex64
 sample_rate = 1e6
 fc = 915.8e6
-NFFT = 512
+NFFT = 4096
 block_length = 100000
 
 files = os.listdir('usrp_iq')
 files = sorted(files)[1:]
 print files
-for myfile in ['10ms_run1.dat', '10ms_run2.dat', '10ms_run3.dat', '10ms_run4.dat', '10ms_run5.dat']:#, '4m_run1.dat', '4m_run2.dat', '4m_run3.dat', '4m_run4.dat', '4m_run5.dat']:
+#for myfile in ['10ms_run1.dat', '10ms_run2.dat', '10ms_run3.dat', '10ms_run4.dat', '10ms_run5.dat']:#, '4m_run1.dat', '4m_run2.dat', '4m_run3.dat', '4m_run4.dat', '4m_run5.dat']:
+for myfile in ['10ms_run1.dat']:#, '4m_run1.dat', '4m_run2.dat', '4m_run3.dat', '4m_run4.dat', '4m_run5.dat']:
     print myfile
     block_offset = 100
     binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
@@ -114,7 +115,8 @@ for myfile in ['10ms_run1.dat', '10ms_run2.dat', '10ms_run3.dat', '10ms_run4.dat
     print size
     size -= binary_offset
     utils = Utilities()
-    tfile = open('usrp_iq/'+myfile[:-4]+'_fft.txt', 'w')
+    tfile = open('usrp_iq/'+myfile[:-4]+'_fft_temp3.txt', 'w')
+    tc = 0
     while size > 0:
         r,i,t = usrp.read_samples(hfile, binary_offset)
         vals.append( utils.plot_fft(r,i,t,sample_rate,fc, NFFT, tfile))
@@ -122,5 +124,8 @@ for myfile in ['10ms_run1.dat', '10ms_run2.dat', '10ms_run3.dat', '10ms_run4.dat
         binary_offset = block_offset*scipy.dtype(scipy.complex64).itemsize
         size -= block_length*scipy.dtype(scipy.complex64).itemsize
         print size
+        if tc > 3:
+            break
+        tc += 1
     hfile.close()
     tfile.close()
