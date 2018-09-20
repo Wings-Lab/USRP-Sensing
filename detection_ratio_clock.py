@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams.update({'font.size':30})
-matplotlib.rcParams['figure.figsize'] = 18, 10
+matplotlib.rcParams['figure.figsize'] = 20, 9
 
 def countTx(d):
-    th = -60
+    th = -70
     count = 0
     low = 1
     skip = False
@@ -20,7 +20,7 @@ def countTx(d):
             count += 1
             low = 0
             skip = True
-            rep = 125
+            rep = 105
         if float(i) < th:
             skip = False
             low = 1
@@ -48,3 +48,26 @@ for clock in clocks:
 
 for i in counts:
     print i, counts[i], np.mean(counts[i])
+
+tx = [40, 54, 57, 58, 63, 67]
+
+idx = np.arange(len(tx))
+width = 0.22
+
+plt.bar(idx, tx, width, label='Online PSD')
+#plt.bar(idx+width, tx_iq, width, label='Offline FFT')
+
+plt.ylim([0, 100])
+plt.xlabel('CPU Clock Frequency (MHz)')
+plt.ylabel('Detection Ratio')
+plt.xticks(np.arange(len(tx))+width/2, [100, 250, 500, 1000, 1296, 1536])
+#plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Smartphone', 'Odroid', 'RPi3', 'RPi0'])
+
+ax = plt.gca()
+ax.yaxis.grid(linestyle='dotted')
+
+plt.legend()
+
+plt.savefig('plots/detection_ratio_clock.pdf')
+
+plt.show()
