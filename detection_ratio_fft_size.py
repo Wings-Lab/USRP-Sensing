@@ -7,7 +7,7 @@ matplotlib.rcParams.update({'font.size':30})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 def countTx(d):
-    th = -80
+    th = -100
     count = 0
     low = 1
     skip = False
@@ -20,14 +20,14 @@ def countTx(d):
             count += 1
             low = 0
             skip = True
-            rep = 120
+            rep = 500
         if float(i) < th:
             skip = False
             low = 1
     return count
 
 clocks = [64, 128, 256, 512, 1024]
-runs = [1, 2, 3, 4, 5]
+runs = [1]#, 2, 3, 4, 5]
 
 counts = {}
 
@@ -35,8 +35,9 @@ for clock in clocks:
     counts[clock] = []
     for r in runs:
         print clock, r
-        data = np.loadtxt('fft_exps/fft_'+str(clock)+'_'+str(r)+'.txt', skiprows=25)
+        data = np.loadtxt('fft_exps/1s/fft_'+str(clock)+'_'+str(r)+'.txt', skiprows=25)
         #plt.plot(data, label=clock, marker='*')
+        #plt.legend()
         #plt.show()
         c = countTx(data)
         counts[clock].append(c)
@@ -65,4 +66,4 @@ plt.legend()
 
 plt.savefig('plots/detection_ratio_fft_size.pdf')
 
-plt.show()
+#plt.show()
