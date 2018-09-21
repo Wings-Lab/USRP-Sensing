@@ -56,12 +56,12 @@ tx = [i for i in reversed(tx)]
 idx = np.arange(len(tx))
 width = 0.22
 
-tx_iq = [60, 94, 98, 99, 100]
+tx_iq = [90, 94, 98, 99, 100]
 
-plt.bar(idx, tx, width, label='Online FFT')
-plt.bar(idx+width, tx_iq, width, label='Offline FFT')
+plt.bar(idx, tx, width, label='Online PSD')
+plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 
-plt.ylim([0, 100])
+plt.ylim([0, 116])
 plt.xlabel('Transmission Length (ms)')
 plt.ylabel('Detection Ratio')
 plt.xticks(np.arange(len(tx))+width/2, [0.001, 1, 10, 100, 1000])
@@ -69,8 +69,9 @@ plt.xticks(np.arange(len(tx))+width/2, [0.001, 1, 10, 100, 1000])
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.legend()
+#plt.legend(bbox_to_anchor=(0.2, 1.1), loc='upper left', ncol=2)
+plt.legend(loc='upper left', ncol=2)
 
-plt.savefig('detection_ratio_usrp.pdf')
+plt.savefig('plots/detection_ratio_usrp.pdf')
 
 plt.show()
