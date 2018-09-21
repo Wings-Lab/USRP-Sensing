@@ -60,7 +60,7 @@ plt.bar(idx, tx, width, label='Online PSD')
 plt.ylim([0, 100])
 plt.xlabel('CPU Clock Frequency (MHz)')
 plt.ylabel('Detection Ratio')
-plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Smartphone', 'Odroid', 'RPi3', 'RPi0'])
+plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Smartphone', 'Odroid', 'RPi3', 'RPi0', 'FPGA'])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
