@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams.update({'font.size':30})
-matplotlib.rcParams['figure.figsize'] = 18, 10
+matplotlib.rcParams['figure.figsize'] = 20, 9
 
 def getData(files):
     data = []
