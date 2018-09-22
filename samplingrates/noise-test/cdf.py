@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':30})
+matplotlib.rcParams.update({'font.size':40})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 f = plt.figure()
@@ -27,9 +27,8 @@ def cdf(data, Colour, Label):
     plt.plot(bin_edges[0:-1], cdf, color=Colour, linewidth=5, label=Label)
     plt.ylim((0,1))
     plt.ylabel("CDF")
-    plt.xlabel("Power")
-    #plt.grid(True)
-    plt.legend(loc='lower right')
+    plt.xlabel("Power (dB)")
+    plt.legend()
     f.savefig("noise-cdf.pdf")
 
 
@@ -39,10 +38,15 @@ data3 = np.loadtxt('4.dat')
 data4 = np.loadtxt('8.dat')
 data5 = np.loadtxt('16.dat')
 data6 = np.loadtxt('32.dat')
-cdf(data, 'b', '1')
-cdf(data2, 'r', '2')
-cdf(data3, 'g', '4')
-cdf(data4, 'c', '8')
-cdf(data5, 'm', '16')
-cdf(data6, 'y', '32')
+data7 = np.loadtxt('rtl-1m.txt', usecols=1)
+data8 = np.loadtxt('rtl-2m.txt', usecols=1)
+
+cdf(data7, 'gold', 'RTL-SDR-1')
+cdf(data8, 'k', 'RTL-SDR-2')
+cdf(data, 'b', 'USRP-1')
+cdf(data2, 'r', 'USRP-2')
+cdf(data3, 'g', 'USRP-4')
+cdf(data4, 'c', 'USRP-8')
+cdf(data5, 'm', 'USRP-16')
+cdf(data6, 'y', 'USRP-32')
 plt.show()

@@ -24,7 +24,7 @@ counts = {}
 for srate in srates:
     counts[srate] = []
     for r in runs:
-        data = np.loadtxt('usrp_iq/'+str(srate)+'m_run'+str(r)+'_fft.txt')
+        data = np.loadtxt('iq/'+str(srate)+'m_run'+str(r)+'_fft.txt')
         counts[srate].append(countTx(data))
 
 for i in counts:
@@ -45,6 +45,6 @@ plt.xticks(np.arange(len(tx)), [0.5, 1, 2, 4, 6, 8, 16])
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.savefig('plots/sampling_rate_vs_detection_ratio.pdf')
+plt.savefig('sampling_rate_vs_detection_ratio.pdf')
 
 plt.show()

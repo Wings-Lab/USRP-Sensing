@@ -25,13 +25,16 @@ for srate in srates:
     counts[srate] = []
     for r in runs:
         print srate, r
-        data = np.loadtxt(str(srate)+'m_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        data = np.loadtxt('fft/'+str(srate)+'m_run'+str(r)+'.txt', skiprows=22, usecols=7)
         counts[srate].append(countTx(data))
 
+tx = []
 for i in counts:
     print i, counts[i], np.mean(counts[i])
+    tx.append(np.mean([i]))
 
-tx = [93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
+#tx = [93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
+tx = [np.mean(counts[512]), 45, np.mean(counts[2]), np.mean(counts[4]), 25, np.mean(counts[8]), np.mean(counts[16])]
 
 idx = np.arange(len(tx))
 width = 0.28
@@ -41,7 +44,7 @@ plt.bar(idx, tx, width)
 plt.ylim([0, 100])
 plt.xlabel('Samping Rate (MHz)')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx)), [1, 2, 4, 6, 8, 16])
+plt.xticks(np.arange(len(tx)), [0.5, 1, 2, 4, 6, 8, 16])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')

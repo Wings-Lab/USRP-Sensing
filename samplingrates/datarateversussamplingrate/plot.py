@@ -3,7 +3,7 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':30})
+matplotlib.rcParams.update({'font.size':40})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
 x = [1, 2, 4]

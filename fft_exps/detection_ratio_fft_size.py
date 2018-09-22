@@ -35,7 +35,7 @@ for clock in clocks:
     counts[clock] = []
     for r in runs:
         print clock, r
-        data = np.loadtxt('fft_exps/1s/fft_'+str(clock)+'_'+str(r)+'.txt', skiprows=25)
+        data = np.loadtxt('1s/fft_'+str(clock)+'_'+str(r)+'.txt', skiprows=25)
         #plt.plot(data, label=clock, marker='*')
         #plt.legend()
         #plt.show()
