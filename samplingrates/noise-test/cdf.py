@@ -39,6 +39,7 @@ data4 = np.loadtxt('8.dat')
 data5 = np.loadtxt('16.dat')
 data6 = np.loadtxt('32.dat')
 data7 = np.loadtxt('rtl-1m.txt', usecols=1)
+data7 = [float(i)-2 for i in data7]
 data8 = np.loadtxt('rtl-2m.txt', usecols=1)
 
 cdf(data7, 'gold', 'RTL-SDR-1')
