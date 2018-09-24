@@ -33,7 +33,6 @@ for i in counts:
     print i, counts[i], np.mean(counts[i])
     tx.append(np.mean([i]))
 
-#tx = [93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
 tx = [np.mean(counts[512]), 45, np.mean(counts[2]), np.mean(counts[4]), 25, np.mean(counts[8]), np.mean(counts[16])]
 
 idx = np.arange(len(tx))

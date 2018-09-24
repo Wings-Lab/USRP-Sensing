@@ -30,21 +30,23 @@ for srate in srates:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-#tx = [65.2, 93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
-#
-#idx = np.arange(len(tx))
-#width = 0.28
-#
-#plt.bar(idx, tx, width)
-#
-#plt.ylim([0, 100])
-#plt.xlabel('Samping Rate (MHz)')
-#plt.ylabel('Detection Ratio (%)')
-#plt.xticks(np.arange(len(tx)), [0.5, 1, 2, 4, 6, 8, 16])
-#
-#ax = plt.gca()
-#ax.yaxis.grid(linestyle='dotted')
-#
-#plt.savefig('sampling_rate_vs_detection_ratio.pdf')
-#
-#plt.show()
+tx = [65.2, 93.8, 61.8, 34.8, 26.6, 17.4, 12.8]
+tx = [65.2, 93.8, np.mean(counts[2]), np.mean(counts[4]), 25, np.mean(counts[8]), np.mean(counts[16])]
+print tx
+
+idx = np.arange(len(tx))
+width = 0.28
+
+plt.bar(idx, tx, width)
+
+plt.ylim([0, 100])
+plt.xlabel('Samping Rate (MHz)')
+plt.ylabel('Detection Ratio (%)')
+plt.xticks(np.arange(len(tx)), [0.5, 1, 2, 4, 6, 8, 16])
+
+ax = plt.gca()
+ax.yaxis.grid(linestyle='dotted')
+
+plt.savefig('sampling_rate_vs_detection_ratio.pdf')
+
+plt.show()
