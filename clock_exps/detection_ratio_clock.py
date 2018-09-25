@@ -38,24 +38,25 @@ for clock in clocks:
     counts[clock] = []
     for r in runs:
         print clock, r
-        #data = np.loadtxt('clock_exps/tx_100/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
-        data = np.loadtxt('usrp_clock_exps/usrp_'+str(r)+'_'+str(clock)+'.txt', skiprows=25)
+        #data = np.loadtxt('tx_100/'+str(clock)+'_run'+str(r)+'.txt', skiprows=22, usecols=7)
+        data = np.loadtxt('tx_100_2/usrp_'+str(r)+'_'+str(clock)+'.txt', skiprows=25)
         #plt.plot(data, marker='*')
         #plt.show()
         c = countTx(data)
-        if c > 5:
-            counts[clock].append(c)
+        #if c > 5:
+        counts[clock].append(c)
 
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [40, 54, 57, 58, 63, 67]
+tx = [30, 44, 50, 59, 66, 67]
+tx_iq = [45, 50, 52, 68, 88, 93]
 
 idx = np.arange(len(tx))
 width = 0.22
 
 plt.bar(idx, tx, width, label='Online PSD')
-#plt.bar(idx+width, tx_iq, width, label='Offline FFT')
+plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 
 plt.ylim([0, 100])
 plt.xlabel('CPU Clock Frequency (MHz)')
@@ -68,6 +69,6 @@ ax.yaxis.grid(linestyle='dotted')
 
 plt.legend()
 
-plt.savefig('plots/detection_ratio_clock.pdf')
+plt.savefig('../plots/detection_ratio_clock.pdf')
 
 plt.show()

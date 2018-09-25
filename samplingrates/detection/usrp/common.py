@@ -52,13 +52,13 @@ plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 plt.ylim([0, 100])
 plt.xlabel('Samping Rate (MHz)')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx)+width/2), [0.5, 1, 2, 4, 6, 8, 16])
+plt.xticks(np.arange(len(tx))+width/2, [0.5, 1, 2, 4, 6, 8, 16])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
 plt.legend()
 
-plt.savefig('../../plots/sampling_rate_vs_detection_ratio.pdf')
+plt.savefig('../../../plots/sampling_rate_vs_detection_ratio_usrp.pdf')
 
 plt.show()
