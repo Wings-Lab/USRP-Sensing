@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/app.dir/rtl-network.cpp.o  -o app -rdynamic -lrtlsdr 
