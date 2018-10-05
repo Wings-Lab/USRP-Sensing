@@ -66,7 +66,7 @@ plt.bar(idx, tx_iq, width, label='RTL-SDR')
 plt.bar(idx+width, tx, width, label='USRP-B210')
 
 plt.ylim([0, 100])
-plt.xlabel('Transmission Length ($10^x$us)')
+plt.xlabel('Transmission Length ($10^x\mu$s)')
 plt.ylabel('Detection Ratio (%)')
 #plt.xticks(np.arange(len(tx))+width/2, [0.001, 0.01, 0.1, 1, 10, 100, 1000])
 plt.xticks(np.arange(len(tx))+width/2, [0, 1, 2, 3, 4, 5, 6])
