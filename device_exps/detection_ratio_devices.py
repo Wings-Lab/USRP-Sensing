@@ -3,8 +3,12 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':30})
-matplotlib.rcParams['figure.figsize'] = 20, 9
+matplotlib.rcParams.update({'font.size':40})
+matplotlib.rcParams['figure.figsize'] = 20, 12
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+fig.subplots_adjust(left=0.12, bottom=0.2, right=0.95)
 
 def countTx(d):
     th = -68
@@ -45,23 +49,24 @@ for clock in clocks:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [72.8, 54, 44, 32, 13]
+tx = [85.8, 49, 37, 13]
+tx_iq = [99.5, 97.1, 90.3, 82.6]
 
 idx = np.arange(len(tx))
 width = 0.22
 
 plt.bar(idx, tx, width, label='Online PSD')
-#plt.bar(idx+width, tx_iq, width, label='Offline FFT')
+plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 
-plt.ylim([0, 100])
-plt.xlabel('CPU Clock Frequency (MHz)')
-plt.ylabel('Detection Ratio')
-plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Smartphone', 'Odroid', 'RPi3', 'RPi1'])
+plt.ylim([0, 119])
+plt.xlabel('Devices')
+plt.ylabel('Detection Ratio (%)')
+plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Odroid-C2', 'RPi3', 'RPi1'])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.legend()
+plt.legend(ncol=2)
 
 plt.savefig('../plots/detection_ratio_devices.pdf')
 
