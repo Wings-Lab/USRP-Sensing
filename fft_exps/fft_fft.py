@@ -50,23 +50,23 @@ for i in counts:
     print i, counts[i], np.mean(counts[i])
 
 clocks = [128, 256, 512, 1024, 2048, 4096, 8192]
-tx = [23.4, 39.6, 25.2, 14.1, 10.9, 9, 8.2]
-tx_1 = [13.4, 49.6, 29.2, 18, 14.9, 13, 10.2]
+tx = [13.4, 43.6, 19.2, 13, 10, 9, 8]
+tx_1 = [98.4, 98.4, 98.4, 98.4, 94.4, 91.2, 77.8]
 idx = np.arange(len(tx))
 width = 0.22
 
-plt.bar(idx, tx, width, label='RTL-SDR')
-plt.bar(idx+width, tx_1, width, label='USRP-B210')
+plt.bar(idx, tx, width, label='Online PSD')
+plt.bar(idx+width, tx_1, width, label='Offline PSD')
 
-plt.ylim([0, 100])
+plt.ylim([0, 115])
 plt.xlabel('FFT Size')
-plt.ylabel('Detection Ratio (%)')
+plt.ylabel('Detection Ratio')
 plt.xticks(np.arange(len(tx))+width/2, clocks)
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.legend()
+plt.legend(ncol=2)
 
 plt.savefig('../plots/detection_ratio_fft_size.pdf')
 
