@@ -8,7 +8,7 @@ matplotlib.rcParams['figure.figsize'] = 18, 10
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-fig.subplots_adjust(left=0.12, bottom=0.15, right=0.99)
+fig.subplots_adjust(left=0.12, bottom=0.2, right=0.95)
 
 def countTx(d):
     th = -100
