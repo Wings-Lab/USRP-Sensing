@@ -49,7 +49,7 @@ for clock in clocks:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [85.8, 49, 37, 13]
+tx = [95.8, 49, 37, 13]
 tx_iq = [99.5, 97.1, 88.3, 74.6]
 
 idx = np.arange(len(tx))

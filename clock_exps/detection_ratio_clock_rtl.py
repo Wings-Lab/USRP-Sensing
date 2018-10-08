@@ -53,8 +53,8 @@ for clock in clocks:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [14, 20, 30, 42, 46, 47]
-tx_iq = [32, 45, 52, 68, 88, 93]
+tx = [20, 22, 25, 30, 34, 37]
+tx_iq = [36, 48, 50, 64, 81, 92]
 
 idx = np.arange(len(tx))
 width = 0.22
@@ -73,6 +73,6 @@ ax.yaxis.grid(linestyle='dotted')
 
 plt.legend()
 
-plt.savefig('../plots/detection_ratio_clock_usrp.pdf')
+plt.savefig('../plots/detection_ratio_clock_rtl.pdf')
 
 plt.show()
