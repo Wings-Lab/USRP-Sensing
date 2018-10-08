@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams.update({'font.size':50})
-matplotlib.rcParams['figure.figsize'] = 20, 9
+matplotlib.rcParams['figure.figsize'] = 20, 12
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -53,8 +53,8 @@ for clock in clocks:
 for i in counts:
     print i, counts[i], np.mean(counts[i])
 
-tx = [20, 22, 25, 30, 34, 37]
-tx_iq = [36, 48, 50, 64, 81, 92]
+tx = [18, 22, 25, 33, 35, 38]
+tx_iq = [36, 48, 50, 74, 88, 92]
 
 idx = np.arange(len(tx))
 width = 0.22

@@ -3,7 +3,7 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':40})
+matplotlib.rcParams.update({'font.size':50})
 matplotlib.rcParams['figure.figsize'] = 20, 12
 
 fig = plt.figure()
@@ -59,14 +59,14 @@ plt.bar(idx, tx, width, label='Online PSD')
 plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 
 plt.ylim([0, 119])
-plt.xlabel('Devices', fontsize=45)
-plt.ylabel('Detection Ratio (%)', fontsize=45)
-plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Odroid-C2', 'RPi3', 'RPi1'], fontsize=45)
+plt.xlabel('Devices')
+plt.ylabel('Detection Ratio (%)')
+plt.xticks(np.arange(len(tx))+width/2, ['Desktop', 'Odroid-C2', 'RPi3', 'RPi1'])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.legend(ncol=2)
+plt.legend(ncol=2, fontsize=40)
 
 plt.savefig('../plots/detection_ratio_devices_rtl.pdf')
 

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams.update({'font.size':50})
-matplotlib.rcParams['figure.figsize'] = 20, 9
+matplotlib.rcParams['figure.figsize'] = 20, 12
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -54,7 +54,7 @@ for i in counts:
     print i, counts[i], np.mean(counts[i])
 
 tx = [14, 20, 30, 42, 46, 47]
-tx_iq = [32, 45, 52, 68, 88, 93]
+tx_iq = [32, 45, 52, 78, 88, 93]
 
 idx = np.arange(len(tx))
 width = 0.22
