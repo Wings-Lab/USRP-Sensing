@@ -3,12 +3,12 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':30})
+matplotlib.rcParams.update({'font.size':40})
 matplotlib.rcParams['figure.figsize'] = 20, 10
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-fig.subplots_adjust(left=0.12, bottom=0.2, right=0.95)
+fig.subplots_adjust(left=0.12, bottom=0.25, right=0.95)
 
 def getData(files):
     data = []
@@ -60,7 +60,7 @@ tx = [i for i in reversed(tx)]
 idx = np.arange(len(tx))
 width = 0.22
 
-tx_iq = [5.6, 6.2, 10.2, 12.2, 17.8, 74.7, 98.8]
+tx_iq = [5.6, 9.2, 15.2, 22.2, 37.8, 74.7, 98.8]
 
 plt.bar(idx, tx_iq, width, label='RTL-SDR')
 plt.bar(idx+width, tx, width, label='USRP-B210')
