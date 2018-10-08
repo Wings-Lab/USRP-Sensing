@@ -3,8 +3,8 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':30})
-matplotlib.rcParams['figure.figsize'] = 18, 10
+matplotlib.rcParams.update({'font.size':40})
+matplotlib.rcParams['figure.figsize'] = 20, 10
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -59,7 +59,7 @@ plt.bar(idx, tx, width, label='RTL-SDR')
 plt.bar(idx+width, tx_1, width, label='USRP-B210')
 
 plt.ylim([0, 100])
-plt.xlabel('FFT Size')
+plt.xlabel('Integration Time (#Samples)')
 plt.ylabel('Detection Ratio (%)')
 plt.xticks(np.arange(len(tx))+width/2, clocks)
 
