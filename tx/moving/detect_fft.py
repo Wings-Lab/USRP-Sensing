@@ -41,8 +41,8 @@ for srate in srates:
 
 print counts
 
-tx = [63.7, 58.6, 50.1, 38.6, 15.9, 4.8, 1.8]
-tx_iq = [58, 40.6, 20.1, 12.6, 2.9, 0.8, 0]
+tx = [48.7, 44.6, 38.1, 27.6, 15.9, 4.8, 1.8]
+tx_iq = [39, 30.6, 18.1, 10.6, 2.9, 0.8, 0]
 
 idx = np.arange(len(tx))
 width = 0.28
@@ -52,9 +52,10 @@ plt.plot(tx, linewidth=10, marker='s', markersize='28', markeredgecolor='black',
 plt.plot(tx_iq, linewidth=10, marker='o', markersize='28', markeredgecolor='black', label='RTL-SDR')
 
 plt.ylim([0, 100])
-plt.xlabel('Distance (m)')
+plt.xlabel('Gain')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx)), ['<1', '5', '10', '15', '20', '25', '30'])
+#plt.xticks(np.arange(len(tx)), ['<1', '5', '10', '15', '20', '25', '30'])
+plt.xticks(np.arange(len(tx)), ['>600', '500', '400', '300', '200', '100', '50'], fontsize=40)
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')

@@ -52,9 +52,10 @@ plt.plot(tx, linewidth=10, marker='s', markersize='28', markeredgecolor='black',
 plt.plot(tx_iq, linewidth=10, marker='o', markersize='28', markeredgecolor='black', label='RTL-SDR')
 
 plt.ylim([0, 100])
-plt.xlabel('Distance (m)')
+plt.xlabel('Gain')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx)), ['<1', '5', '10', '15', '20', '25', '30'])
+#plt.xticks(np.arange(len(tx)), ['<1', '5', '10', '15', '20', '25', '30'])
+plt.xticks(np.arange(len(tx)), ['>600', '500', '400', '300', '200', '100', '50'], fontsize=40)
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
