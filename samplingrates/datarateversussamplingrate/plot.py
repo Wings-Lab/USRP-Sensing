@@ -3,16 +3,21 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':40})
+matplotlib.rcParams.update({'font.size':50})
 matplotlib.rcParams['figure.figsize'] = 18, 10
 
-x = [1, 2, 4]
-y = [4, 8, 16]
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
+fig.subplots_adjust(left=0.18, bottom=0.15, right=0.95)
+
+x = [1, 2]
+y = [i*8 for i in x]
 
 ux = [1, 2, 4, 8, 16, 24, 32]
-uy = [4, 8, 16, 32, 64, 96, 128]
+uy = [i*12 for i in ux]
 
-uy = [i*2 for i in uy]
+#uy = [i*2 for i in uy]
 
 idx = np.arange(len(ux))
 width = 0.28
@@ -30,5 +35,5 @@ plt.ylabel('Data Rate (Mbps)')
 
 plt.legend()
 
-plt.savefig('../plots/datarateversussamplingrate.pdf')
+plt.savefig('../../plots/datarateversussamplingrate.pdf')
 plt.show()

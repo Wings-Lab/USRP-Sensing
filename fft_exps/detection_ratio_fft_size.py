@@ -3,7 +3,7 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':45})
+matplotlib.rcParams.update({'font.size':50})
 matplotlib.rcParams['figure.figsize'] = 20, 10
 
 fig = plt.figure()
