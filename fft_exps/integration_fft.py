@@ -50,8 +50,8 @@ for i in counts:
     print i, counts[i], np.mean(counts[i])
 
 clocks = [128, 256, 512, 1024, 2048, 4096, 8192]
-tx = [21.4, 25.6, 28.2, 38.1, 24.9, 13.2, 4.2]
-tx_1 = [7.4, 19.6, 29.2, 45.9, 32.9, 23, 10.2]
+tx = [23.4, 30.6, 38.2, 14.1, 10.9, 9, 8.2]
+tx_1 = [13.4, 49.6, 29.2, 18, 14.9, 13, 10.2]
 idx = np.arange(len(tx))
 width = 0.22
 
@@ -59,7 +59,7 @@ plt.bar(idx, tx, width, label='RTL-SDR')
 plt.bar(idx+width, tx_1, width, label='USRP-B210')
 
 plt.ylim([0, 100])
-plt.xlabel('FFT Size (#bins)')
+plt.xlabel('Integration Time (#Samples)')
 plt.ylabel('Detection Ratio (%)')
 plt.xticks(np.arange(len(tx))+width/2, clocks)
 
@@ -68,6 +68,6 @@ ax.yaxis.grid(linestyle='dotted')
 
 plt.legend()
 
-plt.savefig('../plots/detection_ratio_fft_size.pdf')
+plt.savefig('../plots/detection_ratio_integration.pdf')
 
 plt.show()

@@ -62,6 +62,6 @@ ax.yaxis.grid(linestyle='dotted')
 
 plt.legend()
 
-plt.savefig('../../plots/tx_moving_vs_detection_ratio_iq.pdf')
+plt.savefig('../../plots/tx_moving_vs_detection_ratio_fft.pdf')
 
 plt.show()
