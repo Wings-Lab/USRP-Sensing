@@ -3,13 +3,13 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams.update({'font.size':46})
+matplotlib.rcParams.update({'font.size':50})
 matplotlib.rcParams['figure.figsize'] = 12, 12.2
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
-fig.subplots_adjust(left=0.168, bottom=0.15, right=0.99)
+fig.subplots_adjust(left=0.18, bottom=0.15, right=0.99)
 
 #def countTx(d):
 #    th = -70
@@ -38,11 +38,11 @@ fig.subplots_adjust(left=0.168, bottom=0.15, right=0.99)
 #    print i, counts[i], np.mean(counts[i])
 #    tx.append(np.mean([i]))
 
-tx = [13.3999999999999999, 45]
-tx_iq = [65.2, 93.8]
+tx = [23.3999999999999999, 35.3]
+tx_iq = [75.2, 93.8]
 
 idx = np.arange(len(tx))
-width = 0.15
+width = 0.12
 
 plt.bar(idx, tx, width, label='Online PSD')
 plt.bar(idx+width, tx_iq, width, label='Offline PSD')
@@ -55,7 +55,7 @@ plt.xticks(np.arange(len(tx))+width/2, [1, 2])
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')
 
-plt.legend()
+plt.legend(fontsize=45, loc='upper center')
 
 plt.savefig('../../../plots/sampling_rate_vs_detection_ratio_rtl.pdf')
 

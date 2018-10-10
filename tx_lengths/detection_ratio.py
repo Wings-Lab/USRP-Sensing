@@ -60,7 +60,7 @@ tx = [i for i in reversed(tx)]
 idx = np.arange(len(tx))
 width = 0.22
 
-tx_iq = [5.6, 9.2, 15.2, 22.2, 37.8, 74.7, 98.8]
+tx_iq = [5.6, 9.2, 15.2, 34.2, 45.8, 74.7, 98.8]
 
 plt.bar(idx, tx_iq, width, label='RTL-SDR')
 plt.bar(idx+width, tx, width, label='USRP-B210')
