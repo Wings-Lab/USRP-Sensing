@@ -40,8 +40,8 @@ for i in counts:
 
 #tx = [np.mean(counts[512]), 45, np.mean(counts[2]), np.mean(counts[4]), 25, np.mean(counts[8]), np.mean(counts[16])]
 #print tx
-tx = [13.3999999999999999, 45, 43.799999999999997, 38.600000000000001, 35, 25.0, 13.0]
-tx_iq = [65.2, 93.8, 87.400000000000006, 53.0, 45, 29.399999999999999, 16.0]
+tx = [13.3999999999999999, 45, 43.799999999999997, 38.600000000000001, 35, 25.0, 13.0, 11.3]
+tx_iq = [65.2, 93.8, 87.400000000000006, 53.0, 45, 29.399999999999999, 16.0, 12.9]
 
 idx = np.arange(len(tx))
 width = 0.28
@@ -52,7 +52,7 @@ plt.bar(idx+width, tx_iq, width, label='Offline PSD')
 plt.ylim([0, 100])
 plt.xlabel('Samping Rate (MHz)')
 plt.ylabel('Detection Ratio (%)')
-plt.xticks(np.arange(len(tx))+width/2, [0.5, 1, 2, 4, 6, 8, 16])
+plt.xticks(np.arange(len(tx))+width/2, [0.5, 1, 2, 4, 6, 8, 16, 32])
 
 ax = plt.gca()
 ax.yaxis.grid(linestyle='dotted')

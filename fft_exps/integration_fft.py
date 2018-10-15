@@ -59,7 +59,7 @@ plt.bar(idx, tx, width, label='RTL-SDR')
 plt.bar(idx+width, tx_1, width, label='USRP-B210')
 
 plt.ylim([0, 100])
-plt.xlabel('Integration Time (#Samples)')
+plt.xlabel('Integration Size (#Samples)')
 plt.ylabel('Detection Ratio (%)')
 plt.xticks(np.arange(len(tx))+width/2, clocks)
 
