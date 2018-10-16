@@ -22,8 +22,8 @@ uy = [i*12 for i in ux]
 idx = np.arange(len(ux))
 width = 0.28
 
-plt.bar(idx, uy, width, label='USRP')
-plt.bar(np.arange(len(x))+width, y, width, label='RTL-SDR')
+plt.bar(np.arange(len(x)), y, width, label='RTL-SDR')
+plt.bar(idx+width, uy, width, label='USRP')
 
 plt.xticks(np.arange(len(ux))+width/2, ux)
 

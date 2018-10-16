@@ -13,7 +13,7 @@ fig.subplots_adjust(left=0.12, bottom=0.2, right=0.95)
 s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ms = [45, 49, 58, 61, 72, 86, 89, 97, 98, 98]
-us = [34, 35, 38, 54, 58, 76, 82, 87, 91, 96]
+us = [34, 35, 38, 54, 58, 76, 82, 87, 91, 92]
 
 plt.plot(s, ms, linewidth=10, marker='s', markersize=28, markeredgecolor='black', label='1ms')
 plt.plot(s, us, linewidth=10, marker='o', markersize=28, markeredgecolor='black', label='1us')

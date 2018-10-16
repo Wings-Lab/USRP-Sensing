@@ -48,8 +48,8 @@ idx = np.arange(len(tx))
 width = 0.28
 
 #plt.bar(idx, tx, width)
-plt.plot(tx, linewidth=10, marker='s', markersize='28', markeredgecolor='black', label='USRP-B210')
 plt.plot(tx_iq, linewidth=10, marker='o', markersize='28', markeredgecolor='black', label='RTL-SDR')
+plt.plot(tx, linewidth=10, marker='s', markersize='28', markeredgecolor='black', label='USRP-B210')
 
 plt.ylim([0, 100])
 plt.xlabel('Gain')
